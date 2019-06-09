@@ -2,15 +2,17 @@
 //sets up an array so you can choose a random word
 var wordArray = ["wordone", "wordtwo", "wordthree"];
 var blankArray = ["_______", "_______", "_________"];
-
-//a function to choose a random index value;
+var randomWord;
+var randomWordPlaceHolder;
+//a function to choose a random index value; //uses the random number as an index number for your array i.e. chooses a word in the array
 function randomIndexValue(){
 var randomIndex = Math.floor(Math.random()* wordArray.length);
-return randomIndex;
+randomWord = wordArray[randomIndex];
+randomWordPlaceHolder = blankArray[randomIndex];
 }
-//uses the random number as an index number for your array i.e. chooses a word in the array
-var randomWord = wordArray[randomIndexValue()];
-var randomWordPlaceHolder = blankArray[randomIndexValue()];
+
+randomIndexValue();
+
 //sets a score value, using it right now to track if my guesses are registering
 var score = 0;
 var alreadyGuessed = ' ';
@@ -37,7 +39,6 @@ for (let i = 0; i < randomWord.length; i++) {
         wordText.textContent = randomWordPlaceHolder;
 
         count++;
-        console.log(count);
     }
 }
 //if the letter isn't guessed then it will display that letter. 
@@ -53,7 +54,10 @@ if(count == 0){
 //adds to score if the word is fully guessed
 if(randomWordPlaceHolder === randomWord){
     score++;
-
+    randomIndexValue();
+    alreadyGuessed = " ";
+    guessLetter.textContent = alreadyGuessed;
+    wordText.textContent = randomWordPlaceHolder;
 }
 //updates the score text before returning
 scoreText.textContent = score;
