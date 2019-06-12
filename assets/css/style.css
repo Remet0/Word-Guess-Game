@@ -40,6 +40,7 @@ body{
 .blinking{
     animation:blinkingText 2s infinite;
     margin-bottom: 20px;
+    font-size: 36px;
 }
 @keyframes blinkingText{
     0%{     color: white;    }

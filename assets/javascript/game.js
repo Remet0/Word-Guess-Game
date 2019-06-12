@@ -1,10 +1,10 @@
 
 //sets up an array so you can choose a random word
-var wordArray = ["wordone", "wordtwo", "wordthree"];
-var blankArray = ["_______", "_______", "_________"];
+var wordArray = ["w o r d o n e", "w o r d t w o", "w o r d t h r e e"];
+var blankArray = ["_ _ _ _ _ _ _", "_ _ _ _ _ _ _", "_ _ _ _ _ _ _ _ _"];
 var randomWord;
 var randomWordPlaceHolder;
-var lives = 9;
+var lives = 5;
 var previousIndex = [];
 var gameStarted = false;
 var hangCount=0;
@@ -48,6 +48,7 @@ var imageChange = document.getElementById("hangimage");
 wordText.textContent = randomWordPlaceHolder;
 livesText.textContent = "Guesses remaining: " + lives;
 scoreText.textContent = "score " + score;
+guessLetter.innerHTML = "Used Letters: <br>" + alreadyGuessed;
 
 //a function used to replace text in a string
 function replaceAt(rword, index, replacement){
@@ -76,7 +77,7 @@ if(count == 0){
     }
     hangCount++;
     alreadyGuessed += ' ' + userGuess;
-    guessLetter.textContent = alreadyGuessed;
+    guessLetter.innerHTML = 'Used Letters: <br>' + alreadyGuessed;
     lives--;
     livesText.textContent = "You have " + lives + " guesses left";
     if(hangCount == 1){
