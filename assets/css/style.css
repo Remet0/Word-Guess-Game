@@ -1,0 +1,50 @@
+body{
+    display: flex row;
+    justify-content: center;
+    background-image: linear-gradient(darkgray, black);
+    color: white;
+}
+.gamebox{
+    border-style: solid;
+    border-width: 5px;
+    border-color: black;
+    height: 100vh;
+    text-align: center;
+}
+#hangman{
+    height: 400px;
+
+}
+#word{
+    margin-bottom: 20px;
+    color: white;
+}
+#score{
+    text-align: left;
+    margin: 30px 0px 5px 30px;
+    height: 10px;
+}
+#lives{
+    text-align: left;
+    margin: 0px 0px 20px 30px;
+    height: 10px;
+
+}
+#guessed{
+    margin-top: 10px;
+    color: white;
+}
+.usedText{
+    color: white;
+}
+.blinking{
+    animation:blinkingText 2s infinite;
+    margin-bottom: 20px;
+}
+@keyframes blinkingText{
+    0%{     color: white;    }
+    49%{    color: transparent; }
+    50%{    color: white; }
+    99%{    color: white;  }
+    100%{   color: white;    }
+}

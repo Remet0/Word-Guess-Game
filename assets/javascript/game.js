@@ -4,11 +4,29 @@ var wordArray = ["wordone", "wordtwo", "wordthree"];
 var blankArray = ["_______", "_______", "_________"];
 var randomWord;
 var randomWordPlaceHolder;
+var lives = 9;
+var previousIndex = [];
+var gameStarted = false;
+var hangCount=0;
+
+
+//sets a function to start game on key press. 
+document.onkeyup = function(event){
+    if( !gameStarted){
+        gameStarted = true;
+        document.getElementsByClassName("blinking")[0].innerHTML = '<br>';
+}
 //a function to choose a random index value; //uses the random number as an index number for your array i.e. chooses a word in the array
 function randomIndexValue(){
 var randomIndex = Math.floor(Math.random()* wordArray.length);
 randomWord = wordArray[randomIndex];
 randomWordPlaceHolder = blankArray[randomIndex];
+for (let i = 0; i < previousIndex.length; i++) {
+    if( previousIndex[i] === randomWord){
+        randomIndexValue();
+    }
+    
+}
 }
 
 randomIndexValue();
@@ -22,7 +40,14 @@ console.log(randomWord);
 var wordText = document.getElementById("word");
 var scoreText = document.getElementById("score");
 var guessLetter = document.getElementById("guessed")
+var livesText = document.getElementById("lives");
+var imageChange = document.getElementById("hangimage");
+
+
+//sets the starting contect for the words.
 wordText.textContent = randomWordPlaceHolder;
+livesText.textContent = "Guesses remaining: " + lives;
+scoreText.textContent = "score " + score;
 
 //a function used to replace text in a string
 function replaceAt(rword, index, replacement){
@@ -43,26 +68,58 @@ for (let i = 0; i < randomWord.length; i++) {
 }
 //if the letter isn't guessed then it will display that letter. 
 if(count == 0){
+
 //if the letter has been added to already guess previously, then dont add it.
     for (let i = 0; i < alreadyGuessed.length; i++) {
         if(userGuess === alreadyGuessed[i])
         return;
     }
+    hangCount++;
     alreadyGuessed += ' ' + userGuess;
     guessLetter.textContent = alreadyGuessed;
+    lives--;
+    livesText.textContent = "You have " + lives + " guesses left";
+    if(hangCount == 1){
+        imageChange.src = "https://www.placecage.com/g/200/300";
+    }
+    if(hangCount == 2){
+        imageChange.src = "http://www.placecage.com/c/200/300";
+    }
+    if(hangCount == 3){
+        imageChange.src = "https://www.placecage.com/200/300";
+    }
+    if(hangCount == 4){
+        imageChange.src = "https://www.placecage.com/gif/200/300";
+    }
+    if(hangCount == 5){
+        imageChange.src = "https://www.placecage.com/g/200/300";
+    }
+    if(lives === 0){
+        document.getElementsByClassName("blinking")[0].innerHTML = 'YOU LOSE!!! <br> press any button to restart';
+        document.onkeyup = function(event){
+            location.reload();
+        }
+    }
 }
+
 //adds to score if the word is fully guessed
 if(randomWordPlaceHolder === randomWord){
+    previousIndex.push(randomWord);
+
     score++;
     randomIndexValue();
     alreadyGuessed = " ";
     guessLetter.textContent = alreadyGuessed;
     wordText.textContent = randomWordPlaceHolder;
+
+    
 }
 //updates the score text before returning
-scoreText.textContent = score;
+scoreText.textContent = 'score:' + score;
 
 return;
+}
+
 }
 
 
