@@ -49,3 +49,7 @@ body{
     99%{    color: white;  }
     100%{   color: white;    }
 }
+h1{
+
+    font-size: 36px;
+}

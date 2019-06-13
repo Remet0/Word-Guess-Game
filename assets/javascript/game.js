@@ -1,7 +1,7 @@
 
 //sets up an array so you can choose a random word
-var wordArray = ["w o r d o n e", "w o r d t w o", "w o r d t h r e e"];
-var blankArray = ["_ _ _ _ _ _ _", "_ _ _ _ _ _ _", "_ _ _ _ _ _ _ _ _"];
+var wordArray = ["a r t h a s", "b l o o d l u s t", "b l i z z a r d", "t h r a l l", "o r g r i m m a r", "s t o r m w i n d", "p a l a d i n", "m a g e", "s h a m a n","n a x x r a m a s","d r u i d", " p r i e s t", "v a r y i a n", "d r a g o n", "g h o u l"];
+var blankArray = ["_ _ _ _ _ _", "_ _ _ _ _ _ _ _ _", "_ _ _ _ _ _ _ _", "_ _ _ _ _ _", "_ _ _ _ _ _ _ _ _", "_ _ _ _ _ _ _ _ _", "_ _ _ _ _ _ _", "_ _ _ _", "_ _ _ _ _ _", "_ _ _ _ _ _ _ _ _", "_ _ _ _ _", "_ _ _ _ _ _", "_ _ _ _ _ _ _","_ _ _ _ _ _","_ _ _ _ _"];
 var randomWord;
 var randomWordPlaceHolder;
 var lives = 5;
@@ -34,8 +34,6 @@ randomIndexValue();
 //sets a score value, using it right now to track if my guesses are registering
 var score = 0;
 var alreadyGuessed = ' ';
-//logs the randomword so i can see what is a right guess and what isn't
-console.log(randomWord);
 //set up a score text that will be updated on screen to visualize if i get a correct answer
 var wordText = document.getElementById("word");
 var scoreText = document.getElementById("score");
@@ -81,19 +79,19 @@ if(count == 0){
     lives--;
     livesText.textContent = "You have " + lives + " guesses left";
     if(hangCount == 1){
-        imageChange.src = "https://www.placecage.com/g/200/300";
+        imageChange.src = "./assets/images/hangman2.jpg";
     }
     if(hangCount == 2){
-        imageChange.src = "http://www.placecage.com/c/200/300";
+        imageChange.src = "./assets/images/hangman3.jpg";
     }
     if(hangCount == 3){
-        imageChange.src = "https://www.placecage.com/200/300";
+        imageChange.src = "./assets/images/hangman4.jpg";
     }
     if(hangCount == 4){
-        imageChange.src = "https://www.placecage.com/gif/200/300";
+        imageChange.src = "./assets/images/hangman5.jpg";
     }
     if(hangCount == 5){
-        imageChange.src = "https://www.placecage.com/g/200/300";
+        imageChange.src = "./assets/images/hangman6.jpg";
     }
     if(lives === 0){
         document.getElementsByClassName("blinking")[0].innerHTML = 'YOU LOSE!!! <br> press any button to restart';
@@ -112,11 +110,14 @@ if(randomWordPlaceHolder === randomWord){
     alreadyGuessed = " ";
     guessLetter.textContent = alreadyGuessed;
     wordText.textContent = randomWordPlaceHolder;
+    lives = 5;
+    hangCount = 0;
 
     
 }
 //updates the score text before returning
 scoreText.textContent = 'score:' + score;
+livesText.textContent = "Guesses remaining: " + lives;
 
 return;
 }
